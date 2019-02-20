@@ -2,8 +2,6 @@
 // succeeded but the new code (which is stricter) gives an error.
 //
 // compile-pass
-//
-// TODO -- why does this test pass?
 
 trait Foo<T, U> { }
 
