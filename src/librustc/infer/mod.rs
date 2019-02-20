@@ -964,8 +964,10 @@ impl<'a, 'gcx, 'tcx> InferCtxt<'a, 'gcx, 'tcx> {
         self.commit_if_ok(|snapshot| {
             let (ty::OutlivesPredicate(r_a, r_b), placeholder_map) =
                 self.replace_bound_vars_with_placeholders(predicate);
-            let origin =
-                SubregionOrigin::from_obligation_cause(cause, || RelateRegionParamBound(cause.span));
+            let origin = SubregionOrigin::from_obligation_cause(
+                cause,
+                || RelateRegionParamBound(cause.span),
+            );
             self.sub_regions(origin, r_b, r_a); // `b : a` ==> `a <= b`
             self.leak_check(false, &placeholder_map, snapshot)?;
             Ok(())
